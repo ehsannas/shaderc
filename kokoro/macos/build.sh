@@ -1,16 +1,40 @@
 #!/bin/bash
 
+
 # Fail on any error.
 set -e
 # Display commands being run.
 set -x
 
-git clone https://github.com/leachim6/hello-world.git
-cd hello-world
+BUILD_ROOT=$PWD
+SRC=$PWD/github/shaderc/
 
-# Checkout the commit we trust
-git checkout 3bab02464b0fdc7c0e59cd39744ea432ec2baafa
-cd o
-gcc -framework Foundation objc.m -o hello
-./hello
+# Get NINJA.
+wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip
+unzip -q ninja-linux.zip
+export PATH="$PWD:$PATH"
+
+cd $SRC
+git submodule update --init
+
+cd $SRC/third_party
+git clone https://github.com/google/googletest.git
+git clone https://github.com/google/glslang.git
+git clone https://github.com/KhronosGroup/SPIRV-Tools.git spirv-tools
+git clone https://github.com/KhronosGroup/SPIRV-Headers.git spirv-headers
+cd $SRC/
+
+mkdir build
+cd $SRC/build
+
+# Invoke the build.
+BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
+echo $(date): Starting build...
+cmake -DCMAKE_MAKE_PROGRAM=ninja -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+ninja
+echo $(date): Build completed.
+
+echo $(date): Starting ctest...
+ctest
+echo $(date): ctest completed.
 
