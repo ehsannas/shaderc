@@ -17,9 +17,8 @@
 set BUILD_ROOT=%cd%
 set SRC=%cd%\github\shaderc
 
-:: Ninja is available on windows instance.
-:: which ninja
-:: ninja --version
+:: Force usage of python 2.7 rather than 3.6
+set PATH=C:\python27;%PATH%
 
 cd %SRC%\third_party
 git clone https://github.com/google/googletest.git

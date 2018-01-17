@@ -14,8 +14,6 @@ wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-mac.
 unzip -q ninja-mac.zip
 chmod +x ninja
 export PATH="$PWD:$PATH"
-which ninja
-ninja --version
 
 cd $SRC/third_party
 git clone https://github.com/google/googletest.git
