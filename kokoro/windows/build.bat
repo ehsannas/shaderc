@@ -31,9 +31,10 @@ cd %SRC%
 mkdir build
 cd %SRC%\build
 
-# Invoke the build.
-echo "Starting build..."
-echo %DATE% %TIME%
+:: #########################################
+:: Invoke the build.
+:: #########################################
+echo "Starting build... %DATE% %TIME%"
 if "%KOKORO_GITHUB_COMMIT%." == "." (
   set BUILD_SHA=%KOKORO_GITHUB_PULL_REQUEST_COMMIT%
 ) else (
@@ -45,14 +46,14 @@ if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 ::ninja
 cmake --build . --config RelWithDebInfo
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
-echo "Build Completed."
-echo %DATE% %TIME%
+echo "Build Completed %DATE% %TIME%"
 
-echo "Running Tests..."
-echo %DATE% %TIME%
+:: #########################################
+:: Run the tests.
+:: #########################################
+echo "Running Tests... %DATE% %TIME%"
 ::ctest
 ctest -C RelWithDebInfo
-echo "Tests Completed."
-echo %DATE% %TIME%
+echo "Tests Completed %DATE% %TIME%"
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 
