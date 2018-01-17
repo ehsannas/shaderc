@@ -12,6 +12,7 @@ SRC=$PWD/github/shaderc/
 # Get NINJA.
 wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip
 unzip -q ninja-linux.zip
+alias ninja=BUILD_ROOT/ninja
 
 cd $SRC
 git submodule update --init
