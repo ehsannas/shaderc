@@ -7,23 +7,20 @@ set -e
 set -x
 
 BUILD_ROOT=$PWD
-SRC=$PWD/github/shaderc/
+SRC=$PWD/github/shaderc
 
 # Get NINJA.
 wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip
 unzip -q ninja-linux.zip
 export PATH="$PWD:$PATH"
 
-cd $SRC
-git submodule update --init
-
 cd $SRC/third_party
 git clone https://github.com/google/googletest.git
 git clone https://github.com/google/glslang.git
 git clone https://github.com/KhronosGroup/SPIRV-Tools.git spirv-tools
 git clone https://github.com/KhronosGroup/SPIRV-Headers.git spirv-headers
-cd $SRC/
 
+cd $SRC/
 mkdir build
 cd $SRC/build
 
