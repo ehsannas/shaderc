@@ -30,9 +30,6 @@ cd %SRC%
 mkdir build
 cd %SRC%\build
 
-:: Set path and environment variables for the current Visual Studio version
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
-
 :: #########################################
 :: Invoke the build.
 :: #########################################
@@ -42,9 +39,9 @@ if "%KOKORO_GITHUB_COMMIT%." == "." (
 ) else (
   set BUILD_SHA=%KOKORO_GITHUB_COMMIT%
 )
-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake ..
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
-ninja
+cmake --build . --config RelWithDebInfo
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 echo "Build Completed %DATE% %TIME%"
 
@@ -55,5 +52,5 @@ echo "Running Tests... %DATE% %TIME%"
 ::ctest
 ctest -C RelWithDebInfo
 echo "Tests Completed %DATE% %TIME%"
-exit /b %ERRORLEVEL%
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 
