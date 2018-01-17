@@ -14,6 +14,8 @@ wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linu
 unzip -q ninja-linux.zip
 chmod +x ninja
 export PATH="$PWD:$PATH"
+which ninja
+ninja --version
 
 cd $SRC/third_party
 git clone https://github.com/google/googletest.git
@@ -28,7 +30,7 @@ cd $SRC/build
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -DCMAKE_MAKE_PROGRAM=ninja -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 ninja
 echo $(date): Build completed.
 
