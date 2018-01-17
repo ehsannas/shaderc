@@ -10,7 +10,7 @@ BUILD_ROOT=$PWD
 SRC=$PWD/github/shaderc
 
 # Get NINJA.
-wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip
+wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-mac.zip
 unzip -q ninja-linux.zip
 chmod +x ninja
 export PATH="$PWD:$PATH"
