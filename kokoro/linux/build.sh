@@ -24,12 +24,12 @@ git clone https://github.com/KhronosGroup/SPIRV-Headers.git spirv-headers
 cd $SRC/
 
 mkdir build
-cd $SRC/build/
+cd $SRC/build
 
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 ninja
 echo $(date): Build completed.
 
