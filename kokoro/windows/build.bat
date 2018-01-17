@@ -18,7 +18,8 @@ set BUILD_ROOT=%cd%
 set SRC=%cd%\github\shaderc
 
 # Ninja is available on windows instance.
-#which ninja
+which ninja
+ninja --version
 
 cd %SRC%\third_party
 git clone https://github.com/google/googletest.git
@@ -39,7 +40,9 @@ if "%KOKORO_GITHUB_COMMIT%." == "." (
   set BUILD_SHA=%KOKORO_GITHUB_COMMIT%
 )
 cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 ninja
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 echo "Build Completed."
 echo %DATE% %TIME%
 
@@ -48,4 +51,5 @@ echo %DATE% %TIME%
 ctest
 echo "Tests Completed."
 echo %DATE% %TIME%
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 
