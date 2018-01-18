@@ -30,7 +30,7 @@ cd %SRC%
 mkdir build
 cd %SRC%\build
 
-:: Set path and environment variables for the current Visual Studio version
+:: Set the path and environment variables for the current Visual Studio version
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat x86_amd64
 
 :: #########################################
