@@ -31,7 +31,7 @@ mkdir build
 cd %SRC%\build
 
 :: Set path and environment variables for the current Visual Studio version
-cmd /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+:: cmd /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 
 :: #########################################
 :: Invoke the build.
@@ -42,7 +42,7 @@ if "%KOKORO_GITHUB_COMMIT%." == "." (
 ) else (
   set BUILD_SHA=%KOKORO_GITHUB_COMMIT%
 )
-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 ninja
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
