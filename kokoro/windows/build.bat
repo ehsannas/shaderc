@@ -31,9 +31,9 @@ mkdir build
 cd %SRC%\build
 
 :: set up msvc build env
-set Platform="X64"
-set PreferredToolArchitecture="x64"
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+::set Platform="X64"
+::set PreferredToolArchitecture="x64"
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
 echo %CMAKE_C_COMPILER%
 echo %CMAKE_CXX_COMPILER%
 
@@ -46,8 +46,8 @@ if "%KOKORO_GITHUB_COMMIT%." == "." (
 ) else (
   set BUILD_SHA=%KOKORO_GITHUB_COMMIT%
 )
-::cmake -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+::cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 ninja
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
