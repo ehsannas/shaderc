@@ -52,8 +52,12 @@ echo "Build Completed %DATE% %TIME%"
 :: Run the tests.
 :: #########################################
 echo "Running Tests... %DATE% %TIME%"
-::ctest
 ctest -C RelWithDebInfo
 echo "Tests Completed %DATE% %TIME%"
+
+:: Clean up everything. This will reduce the time it takes for the bot to report the status.
+cd %BUILD_ROOT%
+rm -rf *
+
 exit /b %ERRORLEVEL%
 
