@@ -30,10 +30,8 @@ cd %SRC%
 mkdir build
 cd %SRC%\build
 
-REM set up msvc build env
-set Platform="X86"
-set PreferredToolArchitecture="x86"
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+:: set up msvc build env
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 
 :: #########################################
 :: Invoke the build.
