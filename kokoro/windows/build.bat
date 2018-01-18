@@ -31,7 +31,7 @@ mkdir build
 cd %SRC%\build
 
 :: Set path and environment variables for the current Visual Studio version
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+cmd /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 
 :: #########################################
 :: Invoke the build.
