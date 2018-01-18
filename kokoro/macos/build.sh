@@ -28,8 +28,17 @@ cd $SRC/build
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -DRE2_BUILD_TESTING=OFF -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+
+echo $(date): Build glslang...
+ninja glslangValidator
+
+echo $(date): Build everything...
 ninja
+
+echo $(date): Check Shaderc for copyright notices...
+ninja check-copyright
+
 echo $(date): Build completed.
 
 echo $(date): Starting ctest...

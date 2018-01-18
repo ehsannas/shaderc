@@ -34,7 +34,7 @@ cd %SRC%\build
 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
 
 :: #########################################
-:: Invoke the build.
+:: Start building.
 :: #########################################
 echo "Starting build... %DATE% %TIME%"
 if "%KOKORO_GITHUB_COMMIT%." == "." (
@@ -42,9 +42,19 @@ if "%KOKORO_GITHUB_COMMIT%." == "." (
 ) else (
   set BUILD_SHA=%KOKORO_GITHUB_COMMIT%
 )
-cmake -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -DRE2_BUILD_TESTING=OFF -DCMAKE_C_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -DCMAKE_CXX_COMPILER="C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/cl.exe" -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
+
+echo "Build glslang... %DATE% %TIME%"
+ninja glslangValidator
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
+
+echo "Build everything... %DATE% %TIME%"
 ninja
+if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
+
+echo "Check Shaderc for copyright notices... %DATE% %TIME%"
+ninja check-copyright
 if %ERRORLEVEL% GEQ 1 exit /b %ERRORLEVEL%
 echo "Build Completed %DATE% %TIME%"
 
