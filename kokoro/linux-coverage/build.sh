@@ -40,7 +40,8 @@ ninja check-copyright
 
 echo $(date): Build completed.
 
-echo $(date): Starting ctest...
-ctest
-echo $(date): ctest completed.
+echo $(date): Check coverage...
+ninja report-coverage
+echo $(date): Check coverage completed.
 
+# TODO: Upload code coverage stats
