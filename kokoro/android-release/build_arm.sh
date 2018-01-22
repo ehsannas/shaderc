@@ -5,5 +5,5 @@ set -e
 # Display commands being run.
 set -x
 
-echo $PWD
-source ./build.sh x86
+SCRIPT_DIR=`dirname "$BASH_SOURCE"`
+source $SCRIPT_DIR/build.sh x86
