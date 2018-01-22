@@ -14,8 +14,8 @@ wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linu
 unzip -q ninja-linux.zip
 export PATH="$PWD:$PATH"
 export BUILD_NDK=ON
-export CXX=clang++
-export CC=clang
+export CC=clang-3.6
+export CXX=clang++-3.6
 clang --version
 
 git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
