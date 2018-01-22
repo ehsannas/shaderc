@@ -16,7 +16,7 @@ BUILD_TYPE="Debug"
 # Possible configurations are:
 # ASAN, COVERAGE, RELEASE, DEBUG, DEBUG_EXCEPTION, RELEASE_MINGW
 
-if [ $CONFIG = "Release" || $CONFIG = "RELEASE_MINGW" ]
+if [[ $CONFIG = "Release" || $CONFIG = "RELEASE_MINGW" ]]
 then
   BUILD_TYPE="RelWithDebInfo"
 fi
