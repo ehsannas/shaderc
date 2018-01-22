@@ -6,4 +6,4 @@ set -e
 set -x
 
 SCRIPT_DIR=`dirname "$BASH_SOURCE"`
-source $SCRIPT_DIR/build.sh x86
+source $SCRIPT_DIR/build.sh "armeabi-v7a with NEON"
