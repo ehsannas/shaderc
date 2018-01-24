@@ -9,9 +9,16 @@ set -x
 BUILD_ROOT=$PWD
 SRC=$PWD/github/shaderc
 CONFIG=$1
+COMPILER=$2
 
 SKIP_TESTS="False"
 BUILD_TYPE="Debug"
+
+CMAKE_C_CXX_COMPILER=""
+if [ $COMPILER = "clang" ]
+then
+  CMAKE_C_CXX_COMPILER="-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
+fi
 
 # Possible configurations are:
 # ASAN, COVERAGE, RELEASE, DEBUG, DEBUG_EXCEPTION, RELEASE_MINGW
@@ -24,7 +31,7 @@ fi
 ADDITIONAL_CMAKE_FLAGS=""
 if [ $CONFIG = "ASAN" ]
 then
-  ADDITIONAL_CMAKE_FLAGS="-DCMAKE_CXX_FLAGS=-fsanitize=address -DCMAKE_C_FLAGS=-fsanitize=address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
+  ADDITIONAL_CMAKE_FLAGS="-DCMAKE_CXX_FLAGS=-fsanitize=address -DCMAKE_C_FLAGS=-fsanitize=address"
   export ASAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer-3.4
 elif [ $CONFIG = "COVERAGE" ]
 then
@@ -57,7 +64,7 @@ cd $SRC/build
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -GNinja -DRE2_BUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=$BUILD_TYPE $ADDITIONAL_CMAKE_FLAGS ..
+cmake -GNinja -DRE2_BUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=$BUILD_TYPE $ADDITIONAL_CMAKE_FLAGS $CMAKE_C_CXX_COMPILER ..
 
 echo $(date): Build glslang...
 ninja glslangValidator

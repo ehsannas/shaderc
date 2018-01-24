@@ -6,4 +6,4 @@ set -e
 set -x
 
 SCRIPT_DIR=`dirname "$BASH_SOURCE"`
-source $SCRIPT_DIR/build.sh RELEASE
+source $SCRIPT_DIR/build.sh DEBUG clang
