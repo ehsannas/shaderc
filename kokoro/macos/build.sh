@@ -8,10 +8,12 @@ set -x
 
 BUILD_ROOT=$PWD
 SRC=$PWD/github/shaderc
+BUILD_TYPE=$1
 
 # Get NINJA.
-wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip
-unzip -q ninja-linux.zip
+wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-mac.zip
+unzip -q ninja-mac.zip
+chmod +x ninja
 export PATH="$PWD:$PATH"
 
 cd $SRC/third_party
@@ -27,7 +29,7 @@ cd $SRC/build
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -DRE2_BUILD_TESTING=OFF -DCMAKE_MAKE_PROGRAM=ninja -GNinja -DCMAKE_BUILD_TYPE=Debug ..
+cmake -GNinja -DRE2_BUILD_TESTING=OFF -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
 
 echo $(date): Build glslang...
 ninja glslangValidator
