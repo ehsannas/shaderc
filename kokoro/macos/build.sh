@@ -16,7 +16,6 @@
 #
 # MacOS Build Script.
 
-
 # Fail on any error.
 set -e
 # Display commands being run.
