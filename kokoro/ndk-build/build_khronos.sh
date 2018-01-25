@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Android Build Script.
+# Linux Build Script.
 
 # Fail on any error.
 set -e
@@ -22,4 +22,4 @@ set -e
 set -x
 
 SCRIPT_DIR=`dirname "$BASH_SOURCE"`
-source $SCRIPT_DIR/build.sh "armeabi-v7a with NEON"
+source $SCRIPT_DIR/build.sh KHRONOS
