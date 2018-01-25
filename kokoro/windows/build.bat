@@ -14,6 +14,8 @@
 ::
 :: Windows Build Script.
 
+@echo on
+
 set BUILD_ROOT=%cd%
 set SRC=%cd%\github\shaderc
 set BUILD_TYPE=%1

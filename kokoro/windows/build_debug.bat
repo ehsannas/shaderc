@@ -14,6 +14,8 @@
 ::
 :: Windows Build Script.
 
+@echo on
+
 :: Find out the directory of the common build script.
 set SCRIPT_DIR=%~dp0
 
