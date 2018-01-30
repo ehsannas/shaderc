@@ -37,8 +37,7 @@ wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linu
 unzip -q ninja-linux.zip
 export PATH="$PWD:$PATH"
 
-# Get android-ndk.
-#git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
+# NDK Path
 export ANDROID_NDK=/opt/android-ndk-r15c
 
 # Get shaderc dependencies.
