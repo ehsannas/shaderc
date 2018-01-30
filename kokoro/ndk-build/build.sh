@@ -39,7 +39,7 @@ export PATH="$PWD:$PATH"
 
 # Get android-ndk.
 #git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
-export ANDROID_NDK=/opt/android-ndk-r16b
+export ANDROID_NDK=/opt/android-ndk-r15c
 
 # Get shaderc dependencies.
 cd $SRC/third_party
