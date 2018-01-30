@@ -35,8 +35,9 @@ export CC=clang-3.6
 export CXX=clang++-3.6
 clang --version
 
-git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
-export ANDROID_NDK=$PWD/android-ndk
+#git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
+#export ANDROID_NDK=$PWD/android-ndk
+export ANDROID_NDK=/opt/android-ndk-r16b
 git clone --depth=1 https://github.com/taka-no-me/android-cmake.git android-cmake
 export TOOLCHAIN_PATH=$PWD/android-cmake/android.toolchain.cmake
 
