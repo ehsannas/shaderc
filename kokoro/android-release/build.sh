@@ -35,9 +35,7 @@ export CC=clang-3.6
 export CXX=clang++-3.6
 clang --version
 
-#git clone --depth=1 https://github.com/urho3d/android-ndk.git android-ndk
-#export ANDROID_NDK=$PWD/android-ndk
-export ANDROID_NDK=/opt/android-ndk-r16b
+export ANDROID_NDK=/opt/android-ndk-r15c
 git clone --depth=1 https://github.com/taka-no-me/android-cmake.git android-cmake
 export TOOLCHAIN_PATH=$PWD/android-cmake/android.toolchain.cmake
 
@@ -55,7 +53,7 @@ cd $SRC/build
 # Invoke the build.
 BUILD_SHA=${KOKORO_GITHUB_COMMIT:-$KOKORO_GITHUB_PULL_REQUEST_COMMIT}
 echo $(date): Starting build...
-cmake -DRE2_BUILD_TESTING=OFF -GNinja -DCMAKE_BUILD_TYPE=Release -DANDROID_NATIVE_API_LEVEL=android-9 -DANDROID_ABI=$TARGET_ARCH -DSHADERC_SKIP_TESTS=ON -DSPIRV_SKIP_TESTS=ON -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_PATH -DANDROID_NDK=$ANDROID_NDK ..
+cmake -DRE2_BUILD_TESTING=OFF -GNinja -DCMAKE_BUILD_TYPE=Release -DANDROID_NATIVE_API_LEVEL=android-14 -DANDROID_ABI=$TARGET_ARCH -DSHADERC_SKIP_TESTS=ON -DSPIRV_SKIP_TESTS=ON -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_PATH -DANDROID_NDK=$ANDROID_NDK ..
 
 
 echo $(date): Build glslang...
